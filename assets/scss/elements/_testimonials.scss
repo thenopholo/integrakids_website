@@ -1,5 +1,6 @@
 .single-testimonials-style {
-    background: #F1F1FF;
+    background: #f08f0f;
+    color: #FFFFFF;
     padding: 31px;
     border-radius: 10px;
     position: relative;
@@ -14,6 +15,7 @@
 
     &.two {
         .quots {
+            color: #FFFFFF;
             margin-left: auto;
             max-width: max-content;
             margin-bottom: 0;
@@ -30,7 +32,7 @@
                 span {
                     padding: 10px 21px;
                     border-radius: 33px;
-                    border: 1px solid rgba(97, 94, 252, 0.2);
+                    border: 1px solid #9e4e35;
                     font-weight: 400;
                     font-size: 16px;
                     color: var(--color-primary);
@@ -58,7 +60,7 @@
     }
 
     p.disc {
-        color: #111032;
+        color: #FFFFFF;
         font-size: 18px;
 
         @media #{$small-mobile} {
@@ -74,12 +76,13 @@
         .info {
             .name {
                 margin-bottom: 3px;
+                color: #9e4e35;
             }
 
             .stars-area {
                 i {
                     font-size: 14px;
-                    color: #FE922F;
+                    color: #FFFFFF;
                 }
             }
         }
@@ -116,7 +119,7 @@
     border-radius: 40px;
 
     @media #{$smlg-device} {
-        background-color: #615EFC;
+        background-color: #f08f0f;
         background-image: none;
     }
 
@@ -146,7 +149,7 @@
         p {
             font-size: 40px;
             line-height: 1.2;
-            color: #fff;
+            color: #fff !important;
             margin-bottom: 40px;
 
             @media #{$sm-layout} {
@@ -204,7 +207,7 @@
             height: 50px;
             width: 50px;
             background: transparent;
-            border: 1px solid #615EFC;
+            border: 1px solid #f08f0f;
             border-radius: 50%;
             display: flex;
             align-items: center;

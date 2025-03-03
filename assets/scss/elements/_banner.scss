@@ -1,5 +1,5 @@
 .banner-area-one {
-    background-image: url(../images/banner/01.webp);
+    background-image: url(../images/banner/01.webp); 
     position: relative;
     height: 798px;
     display: flex;
@@ -22,10 +22,14 @@
         align-items: flex-start;
     }
 
+    .pre-title > img{
+        width: 32px;
+    }
+
     .person-image {
         position: absolute;
         bottom: 0;
-        right: 12%;
+        right: 8%;
         left: auto;
 
         @media #{$laptop-device} {
@@ -71,8 +75,9 @@
     }
 
     .title {
-        font-size: 90px;
+        font-size: 60px;
         line-height: 1.1;
+        width: 800px;
 
         @media #{$smlg-device} {
             font-size: 54px;
@@ -99,6 +104,10 @@
 }
 
 .person-image {
+    .icon_tag{
+        width: 32px;
+    }
+
     .single-tag {
         position: absolute;
         left: 0;

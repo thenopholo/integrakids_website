@@ -14,7 +14,7 @@
     align-items: flex-start;
     padding: 30px 20px;
     border-radius: 10px;
-    border: 1px solid rgba(97, 94, 252, 0.2);
+    border: 1px solid #F08F0F;
 
     .title {
         margin-bottom: 0;
@@ -24,6 +24,10 @@
             font-size: 18px;
         }
     }
+}
+
+.icon > img {
+    height: 62px;
 }
 
 .procedure-iamge-wrapper {
@@ -45,7 +49,7 @@
 .single-service-area {
     padding: 30px 25px;
     border-radius: 10px;
-    border: 1px solid rgba(97, 94, 252, 0.2);
+    border: 1px solid #F08F0F33;
     height: 100%;
     transition: .3s;
     background: #fff;
@@ -112,7 +116,7 @@
 
 
 .bg-light {
-    background-color: #F1F1FF !important;
+    background-color: #F08F0F33 !important;
     border-radius: 10px;
 }
 
