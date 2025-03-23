@@ -1,0 +1,657 @@
+// Estilos para o carrossel da página da clínica em estilo bento e galeria de fotos
+// Este arquivo contém todos os estilos necessários para ambos os componentes
+
+// ================ CARROSSEL ESTILO BENTO ================
+
+.clinica-spaces-carousel {
+    position: relative;
+    overflow: hidden;
+
+    .title-area-center {
+        max-width: 760px;
+        margin: 0 auto 30px;
+
+        .pre {
+            display: block;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+    }
+
+    // Container principal do carrossel bento
+    .bento-carousel-container {
+        position: relative;
+        margin-top: 40px;
+        padding: 20px 0;
+    }
+
+    // Layout específico do estilo bento
+    .bento-space-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+
+        @media (max-width: 991px) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    // Caixa de conteúdo (esquerda)
+    .bento-content-box {
+        flex: 0 0 40%;
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(240, 143, 15, 0.1);
+        position: relative;
+        z-index: 1;
+        transform: translateY(0);
+        transition: all 0.4s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(240, 143, 15, 0.15);
+            border-color: rgba(240, 143, 15, 0.3);
+        }
+
+        h3 {
+            color: var(--color-primary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 60px;
+                height: 3px;
+                background-color: var(--color-primary);
+                border-radius: 3px;
+            }
+        }
+
+        p {
+            color: var(--color-body);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 991px) {
+            flex: 0 0 100%;
+            padding: 25px;
+
+            h3 {
+                font-size: 24px;
+            }
+        }
+    }
+
+    // Recursos destacados no box de conteúdo
+    .bento-features {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(240, 143, 15, 0.08);
+            padding: 10px 15px;
+            border-radius: 50px;
+
+            .feature-icon {
+                width: 32px;
+                height: 32px;
+                background-color: var(--color-primary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                i {
+                    color: #fff;
+                    font-size: 16px;
+                }
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--color-heading-1);
+            }
+        }
+    }
+
+    // Caixa de imagem (direita)
+    .bento-image-box {
+        flex: 0 0 55%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        &:hover {
+            &:before {
+                opacity: 1;
+            }
+
+            img {
+                transform: scale(1.05);
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        @media (max-width: 991px) {
+            flex: 0 0 100%;
+
+            img {
+                height: 300px;
+            }
+        }
+    }
+
+    // Miniaturas no estilo bento
+    .bento-thumbs-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+
+        .bento-thumb {
+            flex: 0 0 calc(20% - 15px);
+            max-width: 150px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+
+            &.active {
+                opacity: 1;
+
+                .thumb-inner {
+                    border-color: var(--color-primary);
+                    background-color: rgba(240, 143, 15, 0.05);
+
+                    span {
+                        color: var(--color-primary);
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .thumb-inner {
+                padding: 12px;
+                border-radius: 15px;
+                border: 2px solid transparent;
+                background-color: #fff;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+                text-align: center;
+
+                img {
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                }
+
+                span {
+                    display: block;
+                    font-size: 14px;
+                    color: var(--color-body);
+                    transition: all 0.3s ease;
+                }
+            }
+
+            &:hover {
+                opacity: 1;
+
+                .thumb-inner {
+                    border-color: var(--color-primary);
+
+                    span {
+                        color: var(--color-primary);
+                    }
+                }
+            }
+
+            @media (max-width: 767px) {
+                flex: 0 0 calc(33.33% - 15px);
+
+                .thumb-inner {
+                    padding: 8px;
+
+                    img {
+                        width: 60px;
+                        height: 60px;
+                    }
+
+                    span {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
+    // Controles de navegação - MODIFICADO PARA CORRIGIR POSICIONAMENTO
+    .bento-carousel-navigation {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        pointer-events: none; // Importante para não interferir com outros elementos
+        padding: 0;
+
+        .bento-button-prev,
+        .bento-button-next {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto; // Restaurar interação apenas nos botões
+            position: relative;
+
+            i {
+                font-size: 20px;
+                color: var(--color-primary);
+                transition: all 0.3s ease;
+            }
+
+            &:hover {
+                background-color: var(--color-primary);
+
+                i {
+                    color: #fff;
+                }
+            }
+
+            &.click-effect {
+                transform: scale(0.9);
+            }
+
+            &.hover-effect {
+                box-shadow: 0 8px 25px rgba(240, 143, 15, 0.3);
+            }
+        }
+
+        .bento-button-prev {
+            margin-left: -30px; // Posição mais à esquerda
+        }
+
+        .bento-button-next {
+            margin-right: -30px; // Posição mais à direita
+        }
+
+        @media (max-width: 1200px) {
+            .bento-button-prev {
+                margin-left: 15px;
+            }
+
+            .bento-button-next {
+                margin-right: 15px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .bento-button-prev,
+            .bento-button-next {
+                width: 45px;
+                height: 45px;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    // Animação para slides
+    .swiper-slide {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+
+        &.swiper-slide-active {
+            opacity: 1;
+        }
+    }
+
+    // Classe de animação para entrada da seção
+    &.animate-in {
+        .bento-content-box,
+        .bento-image-box {
+            animation: fadeIn 0.8s forwards;
+        }
+    }
+  }
+
+  // ================ GALERIA DE FOTOS ================
+
+  .clinica-gallery-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+
+    .title-area-center {
+      max-width: 760px;
+      margin: 0 auto 50px;
+
+      .pre {
+        display: block;
+        text-align: center;
+        margin-bottom: 15px;
+        color: var(--color-primary);
+      }
+    }
+
+    // Filtros de categoria
+    .category-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      .category-filter {
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        background-color: #f5f5f5;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 500;
+
+        &.active,
+        &:hover {
+          background-color: var(--color-primary);
+          color: white;
+        }
+
+        @media (max-width: 767px) {
+          padding: 6px 12px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      margin-bottom: 30px;
+
+      @media (max-width: 991px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 576px) {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        position: relative;
+        transition: all 0.4s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+          img {
+            transform: scale(1.05);
+          }
+
+          .gallery-overlay {
+            opacity: 1;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 250px;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+          display: flex;
+          align-items: flex-end;
+          padding: 20px;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+
+          .gallery-caption {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+          }
+        }
+
+        // Para itens ocultos (que serão revelados com "Ver mais")
+        &.hidden {
+          display: none;
+        }
+
+        // Para animação quando um item é revelado
+        &.fade-in {
+          animation: fadeInScale 0.5s forwards;
+        }
+      }
+    }
+
+    .load-more-btn {
+      text-align: center;
+      margin-top: 20px;
+
+      a {
+        display: inline-block;
+
+        &.disabled {
+          opacity: 0.7;
+          pointer-events: none;
+        }
+      }
+
+      &.fade-out {
+        animation: fadeOut 0.5s forwards;
+      }
+    }
+  }
+
+  // ================ ESTILOS PARA O LIGHTBOX (MAGNIFIC POPUP) ================
+
+  // Base para o lightbox
+  .mfp-bg {
+    opacity: 0.9 !important; // Garantir que o fundo seja escuro o suficiente
+    background: #000;
+  }
+
+  // Melhorias nas setas de navegação
+  .mfp-arrow {
+    opacity: 1 !important; // Garantir que as setas sejam visíveis
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .mfp-arrow:before,
+  .mfp-arrow:after {
+    border-width: 3px !important; // Aumenta o tamanho das setas
+  }
+
+  // Aumenta a área clicável das setas
+  .mfp-arrow-left {
+    left: 20px !important;
+  }
+
+  .mfp-arrow-right {
+    right: 20px !important;
+  }
+
+  // Melhora o contador de imagens
+  .mfp-counter {
+    font-size: 14px;
+    font-weight: 500;
+    color: #f8f8f8;
+  }
+
+  // Estilo melhorado para o título da imagem
+  .mfp-title {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+    padding-top: 10px;
+    color: #f8f8f8;
+  }
+
+  // Animação de zoom para a imagem
+  .mfp-with-zoom .mfp-container,
+  .mfp-with-zoom.mfp-bg {
+    opacity: 0;
+    transition: all 0.3s ease-out;
+  }
+
+  .mfp-with-zoom.mfp-ready .mfp-container {
+    opacity: 1;
+  }
+
+  .mfp-with-zoom.mfp-ready.mfp-bg {
+    opacity: 0.9;
+  }
+
+  .mfp-with-zoom.mfp-removing .mfp-container,
+  .mfp-with-zoom.mfp-removing.mfp-bg {
+    opacity: 0;
+  }
+
+  // Melhora no botão de fechar
+  .mfp-close {
+    font-size: 40px;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Animações adicionais
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeScale {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .img-bento {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .banner{
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center;
+  }
