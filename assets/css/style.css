@@ -7584,6 +7584,14 @@ blockquote b {
   font-weight: 700;
 }
 
+.kid01 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
 /* ========= Forms Styles ========= */
 input,
 button,
@@ -14503,8 +14511,8 @@ header .rts-btn {
 }
 
 .single-service-area.style-bg-light {
-  background: #F1F1FF;
-  border: 1px solid rgba(97, 94, 252, 0.2);
+  background: rgba(240, 143, 15, 0.1254901961);
+  border: 1px solid rgba(240, 143, 15, 0.1254901961);
 }
 .single-service-area.style-bg-light:hover {
   border: 1px solid var(--color-primary);
@@ -16130,7 +16138,7 @@ header .rts-btn {
 }
 
 .menu-item-open > a {
-  color: #5956FF !important;
+  color: #F08F0F !important;
 }
 
 .g-75 {
@@ -18769,10 +18777,10 @@ li.has-dropdown:hover .submenu {
   justify-content: center;
 }
 .breadcrumb-area-wrapper .nav-bread-crumb i {
-  color: #111032;
+  color: #F08F0F;
 }
 .breadcrumb-area-wrapper .nav-bread-crumb a {
-  color: #111032;
+  color: #F08F0F;
 }
 .breadcrumb-area-wrapper .nav-bread-crumb a.current {
   text-decoration: underline;
@@ -18807,7 +18815,6 @@ li.has-dropdown:hover .submenu {
 
 .logo {
   max-width: 250px;
-  filter: brightness(0) invert(1);
 }
 
 .subscribe-area-start {
