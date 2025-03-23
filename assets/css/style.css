@@ -12143,13 +12143,13 @@ Copyright (c) 2015 Daniel Eden
 .title-area-center .pre {
   border-radius: 30px;
   padding: 5px 16px;
-  color: #615EFC;
+  color: #F08F0F;
   margin-bottom: 30px;
   text-align: center;
   display: block;
   max-width: max-content;
   margin: auto;
-  border: 1px solid rgba(97, 94, 252, 0.2);
+  border: 1px solid #9e4e35;
 }
 .title-area-center .title {
   margin-top: 14px;
@@ -15787,6 +15787,7 @@ header .rts-btn {
 .request-appoinemnt-area-main-wrapper {
   background-image: url(../images/appoinment/03.jpg);
   padding: 76px 0 !important;
+  background: #F08F0F;
 }
 
 .request-appoinemnt-area-main-wrapper {
@@ -15802,7 +15803,7 @@ header .rts-btn {
   display: block;
   max-width: max-content;
   margin: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #9e4e35;
 }
 .request-appoinemnt-area-main-wrapper .title {
   margin-top: 20px;
@@ -18802,6 +18803,11 @@ li.has-dropdown:hover .submenu {
 
 .footer-bg {
   background: #9e4e35;
+}
+
+.logo {
+  max-width: 250px;
+  filter: brightness(0) invert(1);
 }
 
 .subscribe-area-start {

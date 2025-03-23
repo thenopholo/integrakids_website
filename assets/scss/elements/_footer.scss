@@ -4,6 +4,11 @@
   background: #9e4e35;
 }
 
+.logo {
+  max-width: 250px;
+  filter: brightness(0) invert(1);
+}
+
 .subscribe-area-start {
   display: flex;
   align-items: center;
