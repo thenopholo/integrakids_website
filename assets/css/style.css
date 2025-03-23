@@ -19675,4 +19675,11 @@ li.has-dropdown:hover .submenu {
   animation: fadeInUp 0.6s forwards;
 }
 
+.photo_how_it_works {
+  max-width: 620px;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 /*# sourceMappingURL=style.css.map */
