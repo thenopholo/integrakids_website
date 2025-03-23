@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*=================Scss Indexing=============
 1.variables
 2.typography
@@ -19449,8 +19450,8 @@ li.has-dropdown:hover .submenu {
 /* Progress Bar */
 .timeline-progress-bar {
   position: absolute;
-  top: 72px;
-  left: 50px;
+  top: 25px; /* Ajustado de 72px para 25px para evitar sobreposição */
+  left: 120px; /* Ajustado de 50px para 120px para alinhar com os step numbers */
   right: 50px;
   height: 4px;
   background-color: rgba(240, 143, 15, 0.3);
@@ -19483,6 +19484,11 @@ li.has-dropdown:hover .submenu {
   position: relative;
 }
 
+/* Adicionar um espaço extra antes do primeiro step para dar mais espaço */
+.timeline-step:first-child {
+  margin-top: 30px;
+}
+
 .timeline-step.active {
   opacity: 1;
   transform: translateY(0);
@@ -19513,6 +19519,8 @@ li.has-dropdown:hover .submenu {
   text-align: center;
   box-shadow: 0 5px 15px rgba(240, 143, 15, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2; /* Garantir que fique acima da barra de progresso */
 }
 
 .timeline-step.active .step-number {

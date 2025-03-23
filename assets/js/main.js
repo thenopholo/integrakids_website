@@ -873,9 +873,11 @@
 /**
  * Script para controlar a timeline interativa da página "Como Funciona"
  * Este script gerencia a navegação entre etapas, animações e interatividade
+ * com navegação por scroll integrada
  */
 document.addEventListener('DOMContentLoaded', function () {
   // Elementos da timeline
+  const timelineWrapper = document.querySelector('.timeline-wrapper');
   const timelineSteps = document.querySelectorAll('.timeline-step');
   const stepDots = document.querySelectorAll('.step-dot');
   const prevButton = document.querySelector('.prev-btn');
@@ -891,8 +893,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Configurar os listeners de eventos para navegação
   if (prevButton && nextButton) {
-    prevButton.addEventListener('click', goToPreviousStep);
-    nextButton.addEventListener('click', goToNextStep);
+    prevButton.addEventListener('click', function () {
+      goToStep(currentStep - 1);
+    });
+    nextButton.addEventListener('click', function () {
+      goToStep(currentStep + 1);
+    });
   }
 
   // Configurar os listeners de eventos para os indicadores de etapa (dots)
@@ -915,26 +921,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /**
-   * Função para ir para a próxima etapa
-   */
-  function goToNextStep() {
-    if (currentStep < totalSteps) {
-      currentStep++;
-      updateTimeline(currentStep);
-    }
-  }
-
-  /**
-   * Função para ir para a etapa anterior
-   */
-  function goToPreviousStep() {
-    if (currentStep > 1) {
-      currentStep--;
-      updateTimeline(currentStep);
-    }
-  }
-
-  /**
    * Função para ir para uma etapa específica
    * @param {number} stepNumber - O número da etapa para a qual navegar
    */
@@ -942,6 +928,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (stepNumber >= 1 && stepNumber <= totalSteps) {
       currentStep = stepNumber;
       updateTimeline(currentStep);
+
+      // Rolar para o step correspondente se a mudança for feita por clique
+      const activeStep = document.querySelector(`.timeline-step[data-step="${currentStep}"]`);
+      if (activeStep) {
+        activeStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   }
 
@@ -966,9 +958,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Atualizar os dots indicadores
+    // Modificado para mostrar progresso: todos os dots até o step atual ficam ativos
     stepDots.forEach(dot => {
       const dotNum = parseInt(dot.getAttribute('data-step'));
-      if (dotNum === stepNumber) {
+      if (dotNum <= stepNumber) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -980,57 +973,43 @@ document.addEventListener('DOMContentLoaded', function () {
     progressIndicator.style.width = `${progressPercentage}%`;
 
     // Atualizar o estado dos botões de navegação
-    prevButton.disabled = stepNumber === 1;
-    nextButton.disabled = stepNumber === totalSteps;
-  }
-
-  // Adicionar interação ao scroll (opcional)
-  function handleIntersection(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Se a timeline está visível, animar a primeira etapa automaticamente
-        setTimeout(() => {
-          const firstStep = document.querySelector('.timeline-step[data-step="1"]');
-          if (firstStep) {
-            firstStep.classList.add('active');
-          }
-        }, 300);
-        // Desconectar o observer após a primeira visualização
-        observer.disconnect();
-      }
-    });
-  }
-
-  // Configurar o Intersection Observer para animar a entrada inicial
-  const timelineWrapper = document.querySelector('.timeline-wrapper');
-  if (timelineWrapper) {
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.3
-    });
-    observer.observe(timelineWrapper);
-  }
-
-  // Adicionar uma navegação com o teclado (acessibilidade)
-  document.addEventListener('keydown', function (event) {
-    // Se a timeline está no campo de visão
-    const rect = timelineWrapper.getBoundingClientRect();
-    const isVisible = (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-
-    if (isVisible) {
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-        goToNextStep();
-      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-        goToPreviousStep();
-      }
+    if (prevButton && nextButton) {
+      prevButton.disabled = stepNumber === 1;
+      nextButton.disabled = stepNumber === totalSteps;
     }
-  });
+  }
 
-  // Adicionar funcionalidade opcional para swipe em dispositivos móveis
+  // Adicionar detecção de scroll para navegação automática
+  function setupScrollNavigation() {
+    // Criar um Intersection Observer para cada step
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6  // O step deve estar 60% visível para ser considerado ativo
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stepNumber = parseInt(entry.target.getAttribute('data-step'));
+          if (stepNumber !== currentStep) {
+            currentStep = stepNumber;
+            updateTimeline(currentStep);
+          }
+        }
+      });
+    }, options);
+
+    // Observar cada step
+    timelineSteps.forEach(step => {
+      observer.observe(step);
+    });
+  }
+
+  // Iniciar a navegação por scroll
+  setupScrollNavigation();
+
+  // Adicionar funcionalidade para swipe em dispositivos móveis
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -1047,10 +1026,55 @@ document.addEventListener('DOMContentLoaded', function () {
     const swipeThreshold = 50; // Mínimo de pixels para considerar um swipe
     if (touchEndX < touchStartX - swipeThreshold) {
       // Swipe para a esquerda (próxima etapa)
-      goToNextStep();
+      goToStep(currentStep + 1);
     } else if (touchEndX > touchStartX + swipeThreshold) {
       // Swipe para a direita (etapa anterior)
-      goToPreviousStep();
+      goToStep(currentStep - 1);
     }
+  }
+
+  // Adicionar uma navegação com o teclado (acessibilidade)
+  document.addEventListener('keydown', function (event) {
+    // Se a timeline está no campo de visão
+    const rect = timelineWrapper.getBoundingClientRect();
+    const isVisible = (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+
+    if (isVisible) {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        goToStep(currentStep + 1);
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        goToStep(currentStep - 1);
+      }
+    }
+  });
+
+  // Adicionar efeito de entrada ao entrar na viewport
+  function handleInitialIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Se a timeline está visível, animar a primeira etapa automaticamente
+        setTimeout(() => {
+          const firstStep = document.querySelector('.timeline-step[data-step="1"]');
+          if (firstStep) {
+            firstStep.classList.add('active');
+          }
+        }, 300);
+        // Desconectar o observer após a primeira visualização
+        observer.disconnect();
+      }
+    });
+  }
+
+  // Configurar o Intersection Observer para animar a entrada inicial
+  if (timelineWrapper) {
+    const initialObserver = new IntersectionObserver(handleInitialIntersection, {
+      threshold: 0.3
+    });
+    initialObserver.observe(timelineWrapper);
   }
 });
