@@ -1,0 +1,233 @@
+/****** TIMELINE INTERACTIVE STYLES ******/
+.timeline-wrapper.interactive {
+  position: relative;
+  padding: 40px 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Progress Bar */
+.timeline-progress-bar {
+  position: absolute;
+  top: 72px;
+  left: 50px;
+  right: 50px;
+  height: 4px;
+  background-color: rgba(240, 143, 15, 0.3);
+  z-index: 1;
+}
+
+.timeline-progress-bar .progress-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #F08F0F;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Steps Container */
+.timeline-steps {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+/* Individual Steps */
+.timeline-step {
+  display: flex;
+  margin-bottom: 80px;
+  opacity: 0.4;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: relative;
+}
+
+.timeline-step.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+/* Step Indicator - Left Circle with Number */
+.step-indicator {
+  position: relative;
+  min-width: 100px;
+  text-align: center;
+  z-index: 2;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background-color: #F08F0F;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 auto 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(240, 143, 15, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-step.active .step-number {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(240, 143, 15, 0.4);
+}
+
+.step-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 2px solid #F08F0F;
+  padding: 12px;
+  transition: transform 0.3s ease;
+}
+
+.timeline-step.active .step-icon {
+  transform: scale(1.1);
+}
+
+.step-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Step Content - Right Side Information */
+.step-content {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 25px 30px;
+  margin-left: 20px;
+  border-left: 4px solid #F08F0F;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-step.active .step-content {
+  transform: translateX(0);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.step-content .title {
+  color: #111032;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.step-description {
+  color: #6B6B6B;
+}
+
+/* Navigation Controls */
+.timeline-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.nav-btn {
+  padding: 12px 25px;
+  background-color: #F08F0F;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #9e4e35;
+  transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.step-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(240, 143, 15, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.step-dot:hover {
+  transform: scale(1.2);
+}
+
+.step-dot.active {
+  background-color: #F08F0F;
+  transform: scale(1.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timeline-step {
+      flex-direction: column;
+      margin-bottom: 60px;
+  }
+
+  .step-indicator {
+      margin-bottom: 20px;
+  }
+
+  .step-content {
+      margin-left: 0;
+  }
+
+  .timeline-progress-bar {
+      display: none;
+  }
+}
+
+/* Animation for content visibility */
+.step-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0;
+}
+
+.timeline-step.active .step-description {
+  max-height: 1000px;
+  padding: 15px 0 0;
+}
+
+/* Animation for entrance */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.timeline-step.animate-in {
+  animation: fadeInUp 0.6s forwards;
+}
