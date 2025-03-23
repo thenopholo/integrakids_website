@@ -18844,6 +18844,7 @@ li.has-dropdown:hover .submenu {
   right: 7px;
   top: 50%;
   transform: translateY(-50%);
+  border-color: #9e4e35 !important;
 }
 
 .rts-success-story-area .vedio-icone img {
@@ -18968,7 +18969,7 @@ li.has-dropdown:hover .submenu {
   background: #fff;
 }
 .copyright-area.two p {
-  color: #111032;
+  color: #f08f0f;
 }
 .copyright-area a:hover {
   color: #9e4e35;
@@ -18994,7 +18995,7 @@ li.has-dropdown:hover .submenu {
   color: var(--color-primary);
 }
 .footer-two .footer-wrapper-style-between {
-  border-color: rgba(97, 94, 252, 0.2);
+  border-color: #f08f0f;
 }
 
 .footer-three {
